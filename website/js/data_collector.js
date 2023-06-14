@@ -15,7 +15,17 @@ const getStationstatus = async () => {
     return await response.json();
 }
 
+const getIncidents = async () => {
+    const response = await fetch(
+        "https://carto.g-ny.org/data/cifs/cifs_waze_v2.json"
+    );
+    //console.log("incidents : ");
+    //console.log(await response.json());
+    return await response.json();
+}
+
 export default {
     getStationinformation : getStationinformation,
-    getStationstatus : getStationstatus
+    getStationstatus : getStationstatus,
+    getIncidents : getIncidents
 };
