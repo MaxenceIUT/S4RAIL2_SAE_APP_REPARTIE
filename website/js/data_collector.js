@@ -3,7 +3,6 @@ const getStationinformation = async () => {
     "https://transport.data.gouv.fr/gbfs/nancy/station_information.json"
   );
   //console.log("infos : ");
-  //console.log(await response.json());
   return await response.json();
 }
 

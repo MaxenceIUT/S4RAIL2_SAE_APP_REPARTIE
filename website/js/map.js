@@ -12,6 +12,9 @@ let stationsInfoData = await data_collector.getStationinformation();
 let stationsStatusData = await data_collector.getStationstatus();
 
 stationsInfoData.data.stations.forEach(station => {
+    const { station_id } = station;
+    const stationStatus = stationsStatusData.data.stations.find(station => station.station_id === station_id);
     L.marker([station.lat, station.lon]).addTo(map)
-        .bindPopup(`Station ${station.name}<br> ${station.address}<br>${station.capacity} places`)
+        .bindPopup(`Station ${station.name}<br> ${station.address}<br>${stationStatus.num_bikes_available} vélos disponibles<br>
+        ${stationStatus.num_docks_available} places de parking libres sur la station<br>Statut : ${stationStatus.status}`);
 });
