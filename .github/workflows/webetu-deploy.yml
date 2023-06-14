@@ -1,0 +1,28 @@
+on:
+  push:
+  workflow_dispatch:
+  
+name: 🚀 Deploy website on webetu
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 🔁 Preparing files (remove git directories)
+      run: |
+        rm -rf .git/ .github/
+      
+    - name: 📂 List current files
+      run: ls -la
+    
+    - name: 📂 Sync files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local_path: '.'
+        remote_path: ${{ secrets.FTP_PATH }}
