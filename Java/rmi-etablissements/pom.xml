@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.univlorraine</groupId>
-    <artifactId>rmietablissements</artifactId>
+    <artifactId>rmi-etablissements</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>fr.univlorraine</groupId>
-            <artifactId>rmiinterfaces</artifactId>
+            <artifactId>rmi-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

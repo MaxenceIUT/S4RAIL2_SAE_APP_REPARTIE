@@ -1,4 +1,6 @@
-public interface ServiceProxy {
+import java.rmi.Remote;
+
+public interface ServiceProxy extends Remote {
 
     void registerGoodFoodProvider(ServiceGoodFood provider);
 
