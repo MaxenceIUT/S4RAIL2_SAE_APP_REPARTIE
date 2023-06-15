@@ -1,8 +1,10 @@
+package fr.univlorraine;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import handlers.EtablissementsHandler;
-import handlers.GoodFoodHandler;
+import fr.univlorraine.handlers.EtablissementsHandler;
+import fr.univlorraine.handlers.GoodFoodHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/rmi-commons/pom.xml" />
         <option value="$PROJECT_DIR$/Java/rmi-etablissements/pom.xml" />
         <option value="$PROJECT_DIR$/Java/rmi-proxy/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/rmi-commons/pom.xml" />
       </list>
     </option>
   </component>

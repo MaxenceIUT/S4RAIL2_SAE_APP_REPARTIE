@@ -1,3 +1,5 @@
+package fr.univlorraine;
+
 public class ServiceProxyImpl implements ServiceProxy {
 
     private ServiceGoodFood goodFoodProvider;

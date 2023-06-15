@@ -1,7 +1,9 @@
-package handlers;
+package fr.univlorraine.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import fr.univlorraine.ServiceEtablissements;
+import fr.univlorraine.WebsiteAPI;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +21,7 @@ public class EtablissementsHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         // Reserve a table
+        WebsiteAPI w = null;
         if (Objects.equals(exchange.getRequestMethod(), "POST")) {
             InputStream requestBody = exchange.getRequestBody();
             String requestBodyString = new String(requestBody.readAllBytes(), StandardCharsets.UTF_8);

@@ -1,3 +1,5 @@
+package fr.univlorraine;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

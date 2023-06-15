@@ -14,10 +14,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Java" target="17" />
-      <module name="rmi-etablissements" target="17" />
-      <module name="rmi-goodfood" target="17" />
-      <module name="rmi-interfaces" target="17" />
-      <module name="rmi-proxy" target="17" />
+      <module name="rmietablissements" target="17" />
+      <module name="rmigoodfood" target="17" />
+      <module name="rmiinterfaces" target="17" />
+      <module name="rmiproxy" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

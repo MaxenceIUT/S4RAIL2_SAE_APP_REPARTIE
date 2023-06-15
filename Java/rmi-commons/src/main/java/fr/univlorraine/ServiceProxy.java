@@ -1,3 +1,5 @@
+package fr.univlorraine;
+
 import java.rmi.Remote;
 
 public interface ServiceProxy extends Remote {

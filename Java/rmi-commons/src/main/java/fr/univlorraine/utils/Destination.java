@@ -1,4 +1,4 @@
-package utils;
+package fr.univlorraine.utils;
 
 public class Destination {
 
