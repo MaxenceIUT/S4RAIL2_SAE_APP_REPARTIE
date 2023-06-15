@@ -5,35 +5,23 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    private static final String userName = "postgres";
-
-    private static final String password = "JBRVB8YpDClwzNF7";
-
-    static String dbName = "postgres";
-
-    private static String urlDB = "jdbc:postgresql://db.xsmbkjnrbdkmorujjhtk.supabase.co:";
-
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "JBRVB8YpDClwzNF7";
+    private static final String databaseName = "postgres";
+    private static final String jdbcBaseString = "jdbc:postgresql://db.xsmbkjnrbdkmorujjhtk.supabase.co:";
     private static Connection instanceConnexion;
 
-
     public static Connection getConnexion() throws SQLException {
-        if (DBConnection.instanceConnexion == null) {
+        if (instanceConnexion == null) {
+            String jdbcString = jdbcBaseString;
             Properties connectionProps = new Properties();
-            connectionProps.put("user", DBConnection.userName);
-            connectionProps.put("password", DBConnection.password);
+            connectionProps.put("user", USERNAME);
+            connectionProps.put("password", PASSWORD);
             String portNumber = "5432";
-            urlDB += portNumber + "/" + dbName;
-            DBConnection.instanceConnexion = DriverManager.getConnection(urlDB, connectionProps);
+            jdbcString += portNumber + "/" + databaseName;
+            instanceConnexion = DriverManager.getConnection(jdbcString, connectionProps);
         }
-        return DBConnection.instanceConnexion;
+        return instanceConnexion;
     }
 
-    public static void setNomDB(String DB) throws SQLException {
-        dbName = DB;
-        instanceConnexion = getConnexion();
-    }
-
-    public static String getDbName() {
-        return dbName;
-    }
 }
