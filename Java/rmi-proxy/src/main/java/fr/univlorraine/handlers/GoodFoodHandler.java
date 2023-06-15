@@ -5,7 +5,6 @@ import com.sun.net.httpserver.HttpHandler;
 import fr.univlorraine.ServiceProxyImpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static fr.univlorraine.utils.HttpUtils.sendJSON;
 
@@ -23,9 +22,9 @@ public class GoodFoodHandler implements HttpHandler {
         String response = "";
         int statusCode = 200;
         try {
-            String restaurants = provider.getGoodFoodProvider().getRestaurants();
-            response = restaurants;
-        } catch (SQLException | IOException e) {
+            if (provider.getGoodFoodProvider() == null) throw new Exception("ServiceGoodFood unavailable");
+            response = provider.getGoodFoodProvider().getRestaurants();
+        } catch (Exception e) {
             statusCode = 500;
             response = "An error occured while fetching restaurants | Error: " + e.getMessage();
         }
