@@ -8,16 +8,8 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/Java/pom.xml" />
-        <option value="$PROJECT_DIR$/RMIGoodfood/pom.xml" />
-        <option value="$PROJECT_DIR$/rmietablissements/pom.xml" />
         <option value="$PROJECT_DIR$/Java/rmigoodfood/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/RMIGoodfood/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" project-jdk-name="17" project-jdk-type="JavaSDK">
