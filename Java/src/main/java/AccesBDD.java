@@ -1,11 +1,29 @@
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AccesBDD implements ServiceBDD {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, RemoteException {
+
+        AccesBDD acc = new AccesBDD();
+        ServiceBDD sb = (ServiceBDD) UnicastRemoteObject.exportObject(acc, 0);
+
+        Registry reg = LocateRegistry.createRegistry(1099);
+        reg.rebind("bdd", sb);
+
+        System.out.println("Service BDD lance");
+
+
+    }
+
     @Override
     public String recupererCoordonnees() throws SQLException {
 
@@ -30,19 +48,6 @@ public class AccesBDD implements ServiceBDD {
 
     @Override
     public void reserverTable(String nom, String prenom, String nb, String tel) {
-    throw new Error();
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, RemoteException {
-
-        AccesBDD acc = new AccesBDD();
-        ServiceBDD sb = (ServiceBDD) UnicastRemoteObject.exportObject(acc, 0);
-
-        Registry reg = LocateRegistry.createRegistry(1099);
-        reg.rebind("bdd", sb);
-
-        System.out.println("Service BDD lance");
-
-
+        throw new Error();
     }
 }
