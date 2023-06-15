@@ -1,6 +1,7 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -10,22 +11,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class AccesBDD implements ServiceBDD {
+public class ServiceGoodFoodImpl implements ServiceGoodFood {
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws RemoteException, NotBoundException {
+        ServiceGoodFoodImpl acc = new ServiceGoodFoodImpl();
+        ServiceGoodFood sb = (ServiceGoodFood) UnicastRemoteObject.exportObject(acc, 0);
 
-        AccesBDD acc = new AccesBDD();
-        ServiceBDD sb = (ServiceBDD) UnicastRemoteObject.exportObject(acc, 0);
-
-        Registry reg = LocateRegistry.createRegistry(1099);
-        reg.rebind("bdd", sb);
+        Registry reg = LocateRegistry.getRegistry(1099);
+        ServiceProxy proxy = (ServiceProxy) reg.lookup("proxy");
+        proxy.registerGoodFoodProvider(sb);
 
         System.out.println("Service BDD lance");
     }
 
     @Override
-    public String recupererCoordonnees() throws SQLException {
-
+    public String getRestaurants() throws SQLException {
         Connection connection = DBConnection.getConnexion();
 
         Statement st = connection.createStatement();
@@ -46,8 +46,7 @@ public class AccesBDD implements ServiceBDD {
     }
 
     @Override
-    public void reserverTable(String nom, String prenom, String nb, String tel) {
-        throw new Error();
+    public void bookTable(String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException {
+        throw new Error("TODO: Not implemented");
     }
-
 }

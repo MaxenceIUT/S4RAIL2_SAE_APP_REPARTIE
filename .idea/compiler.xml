@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="rmiinterfaces" />
+        <module name="rmiproxy" />
         <module name="rmigoodfood" />
+        <module name="rmietablissements" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

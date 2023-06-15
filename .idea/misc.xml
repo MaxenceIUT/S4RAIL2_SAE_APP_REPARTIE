@@ -9,6 +9,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Java/rmigoodfood/pom.xml" />
+        <option value="$PROJECT_DIR$/rmiinterfaces/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/rmietablissements/pom.xml" />
+        <option value="$PROJECT_DIR$/Java/rmiproxy/pom.xml" />
       </list>
     </option>
   </component>
