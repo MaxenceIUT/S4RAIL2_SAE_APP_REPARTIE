@@ -13,7 +13,7 @@ public class RmiEtablissement implements Service {
     @Override
     public String interroge() {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://www.data.gouv.fr/fr/datasets/r/5fb6d2e3-609c-481d-9104-350e9ca134fa"))
+                .uri(URI.create("https://data.enseignementsup-recherche.gouv.fr//explore/dataset/fr-esr-principaux-etablissements-enseignement-superieur/download?format=json&timezone=Europe/Berlin&use_labels_for_header=false"))
                 .GET()
                 .build();
 

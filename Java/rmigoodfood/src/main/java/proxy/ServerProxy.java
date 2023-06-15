@@ -3,6 +3,7 @@ package proxy;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import implementation.RmiEtablissement;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -22,7 +23,13 @@ public class ServerProxy {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            String jsonResponse = "{\"message\": \"Hello, World!\"}"; //
+//            String jsonResponse = "{\"message\": \"Hello, World!\"}"; //
+
+            RmiEtablissement rmiEtablissement = new RmiEtablissement();
+
+            String jsonResponse = rmiEtablissement.interroge();
+
+
 
             exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
