@@ -9,7 +9,6 @@ const getStationinformation = async () => {
     }catch (e) {
         console.log(e.message);
     }
-
 }
 
 const getStationstatus = async () => {

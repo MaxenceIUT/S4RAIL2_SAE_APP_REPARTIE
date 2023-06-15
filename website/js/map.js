@@ -17,7 +17,7 @@ let incidentsData = await data_collector.getIncidents();
 var veloIcon = L.icon({
     iconUrl: 'img/velo.png',
     iconSize:     [40, 40], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
@@ -34,7 +34,7 @@ stationsInfoData.data.stations.forEach(station => {
 var dangerIcon = L.icon({
     iconUrl: 'img/danger.png',
     iconSize:     [50, 50], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
