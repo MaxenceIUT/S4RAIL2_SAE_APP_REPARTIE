@@ -1,9 +1,9 @@
 package fr.univlorraine;
 
+import fr.univlorraine.utils.Destination;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -15,15 +15,17 @@ import java.sql.Statement;
 
 public class ServiceGoodFoodImpl implements ServiceGoodFood {
 
-    public static void main(String[] args) throws RemoteException, NotBoundException {
+    public static void main(String[] args) throws Exception {
+        Destination destination = Destination.pickDestination(args);
+        Registry reg = LocateRegistry.getRegistry(destination.getHost(), destination.getPort());
+
         ServiceGoodFoodImpl acc = new ServiceGoodFoodImpl();
         ServiceGoodFood sb = (ServiceGoodFood) UnicastRemoteObject.exportObject(acc, 0);
 
-        Registry reg = LocateRegistry.getRegistry(1099);
         ServiceProxy proxy = (ServiceProxy) reg.lookup("proxy");
         proxy.registerGoodFoodProvider(sb);
 
-        System.out.println("Service BDD lance");
+        System.out.println("Service GoodFood lancé");
     }
 
     @Override
