@@ -2,8 +2,7 @@ package fr.univlorraine.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import fr.univlorraine.ServiceEtablissements;
-import fr.univlorraine.WebsiteAPI;
+import fr.univlorraine.ServiceProxyImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +11,9 @@ import java.util.Objects;
 
 public class EtablissementsHandler implements HttpHandler {
 
-    private final ServiceEtablissements provider;
+    private final ServiceProxyImpl provider;
 
-    public EtablissementsHandler(ServiceEtablissements provider) {
+    public EtablissementsHandler(ServiceProxyImpl provider) {
         this.provider = provider;
     }
 
