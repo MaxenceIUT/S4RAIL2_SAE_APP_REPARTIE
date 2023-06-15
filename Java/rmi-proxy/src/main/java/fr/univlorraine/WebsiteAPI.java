@@ -21,7 +21,7 @@ public class WebsiteAPI {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         server.createContext("/api/goodfood/restaurant", this.goodFoodHandler);
-        server.createContext("/api/goodfood/table/reserve", this.etablissementsHandler);
+        server.createContext("/api/etablissements", this.etablissementsHandler);
 
         server.start();
     }
