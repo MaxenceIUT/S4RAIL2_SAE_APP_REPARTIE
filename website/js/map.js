@@ -13,6 +13,8 @@ let stationsStatusData = await data_collector.getStationstatus();
 
 let incidentsData = await data_collector.getIncidents();
 
+let restaurantData = await data_collector.getGoodfoodRestaurant();
+
 
 var veloIcon = L.icon({
     iconUrl: 'img/velo.png',
@@ -43,3 +45,15 @@ incidentsData.incidents.forEach(incident => {
     L.marker([longLat[0], longLat[1]],{icon:dangerIcon}).addTo(map)
         .bindPopup(`${incident.short_description}<br> Fin estimée : ${incident.endtime.split('T')[0]}`);
 });
+
+let restaurantIcon = L.icon({
+    iconUrl: 'img/resto.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
+    popupAnchor: [-3, -76]
+});
+
+restaurantData.forEach(resto => {
+    console.log(resto);
+})
+

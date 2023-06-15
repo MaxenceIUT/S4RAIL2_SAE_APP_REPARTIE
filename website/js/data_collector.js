@@ -38,8 +38,20 @@ const getIncidents = async () => {
 
 }
 
+const getGoodfoodRestaurant = async () => {
+    try {
+        let response = await fetch("http://localhost:8080/api/goodfood/restaurant");
+        if (response.ok) {
+            return response.json();
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
 export default {
     getStationinformation : getStationinformation,
     getStationstatus : getStationstatus,
-    getIncidents : getIncidents
+    getIncidents : getIncidents,
+    getGoodfoodRestaurant : getGoodfoodRestaurant
 };
