@@ -54,6 +54,7 @@ let restaurantIcon = L.icon({
 });
 
 restaurantData.forEach(resto => {
-    console.log(resto);
+    L.marker([resto.latitude, resto.longitude], {icon:restaurantIcon}).addTo(map)
+        .bindPopup(`${resto.nom}<br><button id="bouttonReserve" type="submit">Un simple bouton</button>`)
 })
 
