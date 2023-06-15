@@ -5,8 +5,9 @@ import com.sun.net.httpserver.HttpHandler;
 import fr.univlorraine.ServiceProxyImpl;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+
+import static fr.univlorraine.utils.HttpUtils.sendJSON;
 
 public class GoodFoodHandler implements HttpHandler {
 
@@ -19,12 +20,16 @@ public class GoodFoodHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         // Fetch and return all the restaurants
+        String response = "";
+        int statusCode = 200;
         try {
-            exchange.getResponseBody().write(provider.getRestaurants().getBytes(StandardCharsets.UTF_8));
+            String restaurants = provider.getGoodFoodProvider().getRestaurants();
+            response = restaurants;
         } catch (SQLException | IOException e) {
-            exchange.getResponseBody().write("An error occured while fetching restaurants".getBytes(StandardCharsets.UTF_8));
-            throw new RuntimeException(e);
+            statusCode = 500;
+            response = "An error occured while fetching restaurants | Error: " + e.getMessage();
         }
+        sendJSON(statusCode, exchange, response);
     }
 
 }

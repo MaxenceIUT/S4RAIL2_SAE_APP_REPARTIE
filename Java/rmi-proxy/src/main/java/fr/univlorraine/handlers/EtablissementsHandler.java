@@ -19,12 +19,17 @@ public class EtablissementsHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        // Reserve a table
-        WebsiteAPI w = null;
         if (Objects.equals(exchange.getRequestMethod(), "POST")) {
             InputStream requestBody = exchange.getRequestBody();
-            String requestBodyString = new String(requestBody.readAllBytes(), StandardCharsets.UTF_8);
-            exchange.getResponseBody().write(requestBodyString.getBytes(StandardCharsets.UTF_8));
+            String response = "";
+            try {
+                response = provider.getEtablissementsProvider().getEtablissements();
+            } catch (InterruptedException e) {
+                response = "An error occured while fetching restaurants";
+                // Set the response status code to 500
+                exchange.sendResponseHeaders(500, response.getBytes(StandardCharsets.UTF_8).length);
+            }
+            exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
         }
     }
 
