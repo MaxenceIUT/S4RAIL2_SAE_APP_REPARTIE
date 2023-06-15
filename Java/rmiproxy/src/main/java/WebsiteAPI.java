@@ -1,29 +1,30 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import handlers.EtablissementsHandler;
+import handlers.GoodFoodHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.util.Objects;
 
 public class WebsiteAPI {
 
-    public static void main(String[] args) throws IOException {
+    private GoodFoodHandler goodFoodHandler;
+    private EtablissementsHandler etablissementsHandler;
+
+    public WebsiteAPI(ServiceProxyImpl serviceProxy) {
+        this.goodFoodHandler = new GoodFoodHandler(serviceProxy.getGoodFoodProvider());
+        this.etablissementsHandler = new EtablissementsHandler(serviceProxy.getEtablissementsProvider());
+    }
+
+    public void startAPI() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
-        server.createContext("/api/goodfood/restaurant", exchange -> {
-            // Fetch and return all the restaurants
-        });
-        server.createContext("/api/goodfood/table/reserve", exchange -> {
-            // Reserve a table
-            if (Objects.equals(exchange.getRequestMethod(), "POST")) {
+        server.createContext("/api/goodfood/restaurant", this.goodFoodHandler);
+        server.createContext("/api/goodfood/table/reserve", this.etablissementsHandler);
 
-            }
-        });
         server.start();
-        System.out.println("Server started");
-
     }
 
     static class MyHandler implements HttpHandler {
