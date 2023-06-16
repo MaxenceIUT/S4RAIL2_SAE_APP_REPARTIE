@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static fr.univlorraine.utils.HttpUtils.sendJSON;
+
 public class EtablissementsHandler implements HttpHandler {
 
     private final ServiceProxyImpl provider;
@@ -19,18 +21,17 @@ public class EtablissementsHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        if (Objects.equals(exchange.getRequestMethod(), "POST")) {
-            InputStream requestBody = exchange.getRequestBody();
+            int statusCode = 200;
             String response = "";
             try {
                 response = provider.getEtablissementsProvider().getEtablissements();
             } catch (InterruptedException e) {
-                response = "An error occured while fetching restaurants";
-                // Set the response status code to 500
-                exchange.sendResponseHeaders(500, response.getBytes(StandardCharsets.UTF_8).length);
+                statusCode = 500;
+                response = "An error occured while fetching restaurants | Error: " + e.getMessage();
             }
-            exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
-        }
+            sendJSON(statusCode, exchange, response);
+
+
     }
 
 }

@@ -14,10 +14,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Java" target="17" />
-      <module name="rmi-commons" target="1.8" />
-      <module name="rmi-etablissements" target="1.8" />
-      <module name="rmi-goodfood" target="1.8" />
-      <module name="rmi-proxy" target="1.8" />
       <module name="rmietablissements" target="17" />
       <module name="rmigoodfood" target="17" />
       <module name="rmiinterfaces" target="17" />

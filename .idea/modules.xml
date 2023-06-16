@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Java/rmi-commons/rmi-commons.iml" filepath="$PROJECT_DIR$/Java/rmi-commons/rmi-commons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Java/rmi-etablissements/rmi-etablissements.iml" filepath="$PROJECT_DIR$/Java/rmi-etablissements/rmi-etablissements.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Java/rmi-goodfood/rmi-goodfood.iml" filepath="$PROJECT_DIR$/Java/rmi-goodfood/rmi-goodfood.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Java/rmi-proxy/rmi-proxy.iml" filepath="$PROJECT_DIR$/Java/rmi-proxy/rmi-proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/website/website.iml" filepath="$PROJECT_DIR$/website/website.iml" />
     </modules>
   </component>
