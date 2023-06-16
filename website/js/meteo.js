@@ -26,5 +26,49 @@ let meteobars = document.querySelectorAll(".element-bar");
 let index = 0;
 for(let meteobar of meteobars){
     meteobar.textContent = list_date[index]
+    meteobar.addEventListener('click',clickEvent)
     index++
 }
+
+function clickEvent(target){
+    let textArea = document.querySelector(".right-e-textArea")
+    let contenu = response[this.textContent]
+    console.log(contenu)
+    textArea.innerHTML = `<h1>${this.textContent}</h1>
+    <div>
+        Temperature : ${(contenu['temperature']['sol'] - 273.15).toFixed(1)}℃    
+        <br/>
+        Pression : le niveau de la mer : ${contenu['pression']['niveau_de_la_mer']} Pa
+        <br/>
+        Quantité de pluie : ${contenu['pluie']}mm
+        <br/>
+        humidité : 2m : ${contenu['humidite']['2m']}%
+        <br/>
+        Vitesse moyenne du vent : 10m : ${contenu['vent_moyen']['10m']}m/s
+        <br/>
+        Vitesse des rafales de vent : 10m : ${contenu['vent_rafales']['10m']}m/s
+        <br/>
+        Direction du vent : 10m : ${contenu['vent_direction']['10m']} degrés (mesurée dans le sens des aiguilles d'une montre à partir du nord)
+        <br/>
+        Isotherme zéro degré : ${contenu['iso_zero']}m 
+        <br/>
+        Risque de neige : ${contenu['risque_neige']}  
+        <br/>
+        nébulosité :
+        <br/>
+        &nbsp;&nbsp;&nbsp;
+        - Couverture nuageuse élevée : ${contenu['nebulosite']['haute']}%
+        <br/>
+        &nbsp;&nbsp;&nbsp;
+        - Couverture nuageuse moyenne : ${contenu['nebulosite']['moyenne']}%
+        <br/>
+        &nbsp;&nbsp;&nbsp;
+        - Couverture nuageuse basse : ${contenu['nebulosite']['basse']}%
+        <br/>
+        &nbsp;&nbsp;&nbsp;
+        - Couverture nuageuse totale : ${contenu['nebulosite']['totale']}%
+       
+    </div>
+    `;
+}
+
