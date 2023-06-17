@@ -19,7 +19,7 @@ for(let date in response){
 }
 
 list_date.length = 8
-console.log(list_date)
+// console.log(list_date)
 
 
 
@@ -37,7 +37,7 @@ clickEvent.apply(meteobars[0])
 function clickEvent(target){
     let textArea = document.querySelector(".right-e-textArea")
     let contenu = response[this.textContent]
-    console.log(contenu)
+    // console.log(contenu)
     textArea.innerHTML = `<h1>${this.textContent}</h1>
     <div>
         Temperature : ${(contenu['temperature']['sol'] - 273.15).toFixed(1)}℃    
