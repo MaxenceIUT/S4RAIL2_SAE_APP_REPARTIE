@@ -21,7 +21,10 @@ for(let date in response){
 list_date.length = 8
 console.log(list_date)
 
+
+
 let meteobars = document.querySelectorAll(".element-bar");
+
 
 let index = 0;
 for(let meteobar of meteobars){
@@ -29,6 +32,7 @@ for(let meteobar of meteobars){
     meteobar.addEventListener('click',clickEvent)
     index++
 }
+clickEvent.apply(meteobars[0])
 
 function clickEvent(target){
     let textArea = document.querySelector(".right-e-textArea")
