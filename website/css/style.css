@@ -35,6 +35,7 @@ li a {
   text-decoration: none;
   color: white;
   font-weight: 600;
+  margin: 0.5rem;
 }
 
 li a:hover {
