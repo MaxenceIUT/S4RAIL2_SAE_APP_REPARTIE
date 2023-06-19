@@ -55,6 +55,48 @@ let restaurantIcon = L.icon({
 
 restaurantData.forEach(resto => {
     L.marker([resto.latitude, resto.longitude], {icon:restaurantIcon}).addTo(map)
-        .bindPopup(`${resto.nom}<br><button id="bouttonReserve" type="submit">Un simple bouton</button>`)
-})
+        .bindPopup(`${resto.nom}<br>
+<div id="form">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom">
+    <br>
+    <label for="prenom">Prenom :</label>
+    <input type="text" id="prenom">
+    <br>
+    <label for="nbInv">Nombre d'invité :</label>
+    <input type="number" id="nbInv">
+    <br>
+    <label for="tel">Telephone :</label>
+    <input type="tel" id="tel">
+    <br>
+    <button id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
+</div>`)
+});
+
+document.querySelector("#bouttonReserve").addEventListener((e) => {
+    let nom = document.getElementById('nom').value;
+    let prenom = document.getElementById('prenom').value;
+    let nbInv = document.getElementById('nbInv').value;
+    let tel = document.getElementById('tel').value;
+    let nomResto = this.getAttribute('data-nomResto');
+
+    let parametres = new URLSearchParams();
+    parametres.append('nom', nom);
+    parametres.append('prenom', prenom);
+    parametres.append('nbInv', nbInv);
+    parametres.append('tel', tel);
+    parametres.append('nomResto', nomResto);
+
+    fetch('/api/goodfood/reserver', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: parametres.toString()
+    });
+
+
+});
+
+
 

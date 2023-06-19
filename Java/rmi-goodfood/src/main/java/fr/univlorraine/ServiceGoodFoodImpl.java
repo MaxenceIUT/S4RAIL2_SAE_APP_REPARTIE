@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ServiceGoodFoodImpl implements ServiceGoodFood {
 
@@ -50,7 +52,21 @@ public class ServiceGoodFoodImpl implements ServiceGoodFood {
     }
 
     @Override
-    public void bookTable(String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException {
-        throw new Error("TODO: Not implemented");
+    public void bookTable(String nomRestorant, String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException {
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
+
+        Connection connexion = DBConnection.getConnexion();
+
+        Statement st = connexion.createStatement();
+        st.executeUpdate("INSERT INTO goodfood_reservations (restaurant_id, table_id, reservation_date, people_count) VALUES");
+
+
+
+
+
+
     }
 }

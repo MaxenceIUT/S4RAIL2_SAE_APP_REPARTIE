@@ -21,5 +21,5 @@ public interface ServiceGoodFood extends Remote {
      * @throws RemoteException Si une erreur réseau est survenue
      * @throws SQLException    Si une erreur SQL est survenue
      */
-    void bookTable(String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException;
+    void bookTable(String nomRestaurant, String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException;
 }
