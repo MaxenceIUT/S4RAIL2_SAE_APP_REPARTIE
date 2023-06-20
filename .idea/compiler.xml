@@ -12,12 +12,5 @@
         <module name="rmi-proxy" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Java" target="17" />
-      <module name="rmietablissements" target="17" />
-      <module name="rmigoodfood" target="17" />
-      <module name="rmiinterfaces" target="17" />
-      <module name="rmiproxy" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
