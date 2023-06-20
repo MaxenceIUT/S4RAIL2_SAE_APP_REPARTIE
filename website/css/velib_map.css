@@ -1,0 +1,10 @@
+html {
+    background-color: #151414;
+    color-scheme: dark light;
+    font-family: sans-serif;
+    color: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+}
