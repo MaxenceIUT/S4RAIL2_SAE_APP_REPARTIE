@@ -49,7 +49,19 @@ const getGoodfoodRestaurant = async () => {
     }
 }
 
+const getEtablissements = async () => {
+    try {
+        let response = await fetch("http://localhost:8080/api/etablissements");
+        if (response.ok) {
+            return response.json();
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
 export default {
+    getEtablissements : getEtablissements,
     getStationinformation : getStationinformation,
     getStationstatus : getStationstatus,
     getIncidents : getIncidents,

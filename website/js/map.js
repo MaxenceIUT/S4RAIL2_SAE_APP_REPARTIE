@@ -15,6 +15,27 @@ let incidentsData = await data_collector.getIncidents();
 
 let restaurantData = await data_collector.getGoodfoodRestaurant();
 
+let etablissementsData = await data_collector.getEtablissements();
+
+var etablissementIcon = L.icon({
+    iconUrl: 'img/velo.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+etablissementsData.forEach(etablissement => {
+    console.log(etablissement)
+    L.marker([etablissement.fields.coordonnees[0],etablissement.fields.coordonnees[1]]).addTo(map)
+
+})
+
+
+
+
+
+
+
 
 var veloIcon = L.icon({
     iconUrl: 'img/velo.png',
@@ -72,6 +93,11 @@ restaurantData.forEach(resto => {
     <button id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
 </div>`)
 });
+
+
+
+
+
 
 document.querySelector("#bouttonReserve").addEventListener((e) => {
     let nom = document.getElementById('nom').value;
