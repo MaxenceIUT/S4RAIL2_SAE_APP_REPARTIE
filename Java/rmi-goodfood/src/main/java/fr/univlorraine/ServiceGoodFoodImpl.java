@@ -8,10 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -52,21 +49,31 @@ public class ServiceGoodFoodImpl implements ServiceGoodFood {
     }
 
     @Override
-    public void bookTable(String nomRestorant, String nom, String prenom, String nombreInvites, String numTelephone) throws SQLException, RemoteException {
-
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = dateFormat.format(currentDate);
+    public void bookTable(String nomRestorant, String nom, String prenom, String nombreInvites, String numTelephone, String dateRes) throws SQLException, RemoteException {
 
         Connection connexion = DBConnection.getConnexion();
 
-        Statement st = connexion.createStatement();
-        st.executeUpdate("INSERT INTO goodfood_reservations (restaurant_id, table_id, reservation_date, people_count) VALUES");
+        PreparedStatement pst = connexion.prepareStatement("SELECT id FROM goodfood_restaurants WHERE name = ?");
+        pst.setString(1, nomRestorant);
+
+        ResultSet res = pst.executeQuery();
+        int idResto = res.getInt(1);
+
+        PreparedStatement pst2 = connexion.prepareStatement("SELECT table_id FROM goodfood_tables WHERE seat_count >= ? AND table_id NOT IN (SELECT table_id FROM goodfood_reservations WHERE reservation_date = ?)");
+        pst2.setString(1, nombreInvites);
+        pst2.setString(2, dateRes);
+
+        res = pst2.executeQuery();
+        int idTab = res.getInt(1);
 
 
+        PreparedStatement pst3 = connexion.prepareStatement("INSERT INTO goodfood_reservations (restaurant_id, table_id, reservation_date, people_count) VALUES (?, ?, ?, ? )");
+        pst3.setInt(1, idResto);
+        pst3.setInt(2, idTab);
+        pst3.setString(3, dateRes);
+        pst3.setString(4, nombreInvites);
 
-
-
+        pst3.executeUpdate();
 
     }
 }

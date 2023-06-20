@@ -71,7 +71,7 @@ let restaurantIcon = L.icon({
 });
 
 restaurantData.forEach(resto => {
-    L.marker([resto.latitude, resto.longitude], {icon:restaurantIcon}).addTo(map)
+    const marker = L.marker([resto.latitude, resto.longitude], {icon:restaurantIcon}).addTo(map)
         .bindPopup(`${resto.nom}<br>
 <div id="form">
     <label for="nom">Nom :</label>
@@ -87,38 +87,53 @@ restaurantData.forEach(resto => {
     <input type="tel" id="tel">
     <br>
     <button id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
-</div>`)
-});
+</div>`);
 
 
 
 
 
 
-document.querySelector("#bouttonReserve").addEventListener((e) => {
-    let nom = document.getElementById('nom').value;
-    let prenom = document.getElementById('prenom').value;
-    let nbInv = document.getElementById('nbInv').value;
-    let tel = document.getElementById('tel').value;
-    let nomResto = this.getAttribute('data-nomResto');
+    marker.on('popupopen', (e) => {
+        const popup = e.popup;
+        const button = popup.getElement().querySelector("#bouttonReserve");
+        button.addEventListener("click",(event) => {
+            let nom = document.getElementById('nom').value;
+            let prenom = document.getElementById('prenom').value;
+            let nbInv = document.getElementById('nbInv').value;
+            let tel = document.getElementById('tel').value;
+            let nomResto = event.target.getAttribute('data-nomResto');
 
-    let parametres = new URLSearchParams();
-    parametres.append('nom', nom);
-    parametres.append('prenom', prenom);
-    parametres.append('nbInv', nbInv);
-    parametres.append('tel', tel);
-    parametres.append('nomResto', nomResto);
+            if (nom !== '' && prenom !== '' && nbInv != null && tel !== '') {
+                let parametres = new URLSearchParams();
+                parametres.append('nom', nom);
+                parametres.append('prenom', prenom);
+                parametres.append('nbInv', nbInv);
+                parametres.append('tel', tel);
+                parametres.append('nomResto', nomResto);
 
-    fetch('/api/goodfood/reserver', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: parametres.toString()
+                fetch('http://localhost:8080/api/goodfood/reserver', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: parametres.toString()
+                });
+
+            } else {
+                console.log("Parametres incomplets");
+            }
+
+
+
+
+        });
+
+
+
     });
-
-
 });
+
 
 
 

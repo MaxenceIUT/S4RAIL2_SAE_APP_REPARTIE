@@ -6,11 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rmi-commons" />
         <module name="rmi-goodfood" />
+        <module name="rmi-commons" />
         <module name="rmi-etablissements" />
         <module name="rmi-proxy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rmi-commons" target="17" />
+      <module name="rmi-etablissements" target="17" />
+      <module name="rmi-goodfood" target="17" />
+      <module name="rmi-proxy" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
