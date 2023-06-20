@@ -25,17 +25,13 @@ var etablissementIcon = L.icon({
 });
 
 etablissementsData.forEach(etablissement => {
-    console.log(etablissement)
-    L.marker([etablissement.fields.coordonnees[0],etablissement.fields.coordonnees[1]]).addTo(map)
+    let fields = etablissement['fields'];
 
-})
+    if(fields['coordonnees']){
+        L.marker([fields['coordonnees'][0],fields['coordonnees'][1]]).addTo(map);
+    }
 
-
-
-
-
-
-
+});
 
 var veloIcon = L.icon({
     iconUrl: 'img/velo.png',

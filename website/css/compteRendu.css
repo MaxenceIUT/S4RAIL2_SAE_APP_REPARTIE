@@ -26,3 +26,16 @@ body{
     background-color: #FFFFFF;
     height: 100%;
 }
+
+.partie-5{
+
+}
+
+a {
+    color: black;
+    transition: color 0.3s;
+}
+
+a:hover{
+    color: #737373;
+}
