@@ -1,5 +1,6 @@
 package fr.univlorraine.utils;
 
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
@@ -14,9 +15,7 @@ public class HttpUtils {
      * @throws IOException If an error occurs while sending the response
      */
     public static void sendJSON(int statusCode, HttpExchange exchange, String response) throws IOException {
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+        setupCORS(exchange);
         exchange.getResponseHeaders().set("Content-Type", "application/json");
 
         byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
@@ -25,6 +24,13 @@ public class HttpUtils {
         OutputStream os = exchange.getResponseBody();
         os.write(bytes);
         os.close();
+    }
+
+    public static void setupCORS(HttpExchange exchange) {
+        Headers headers = exchange.getResponseHeaders();
+        headers.set("Access-Control-Allow-Origin", "*");
+        headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        headers.set("Access-Control-Allow-Headers", "Content-Type");
     }
 
 }

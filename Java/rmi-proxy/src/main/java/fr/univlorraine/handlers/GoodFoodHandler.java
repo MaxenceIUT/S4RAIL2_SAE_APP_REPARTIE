@@ -31,6 +31,7 @@ public class GoodFoodHandler implements HttpHandler {
             try {
                 sendJSON(statusCode, exchange, response);
             } catch (IOException e) {
+                e.printStackTrace();
                 throw new RuntimeException(e);
             }
         });

@@ -8,9 +8,10 @@ import fr.univlorraine.handlers.GoodFoodHandler;
 import fr.univlorraine.handlers.ReserverTableHandler;
 
 import javax.net.ssl.*;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
+import java.net.URISyntaxException;
 import java.security.*;
 import java.security.cert.CertificateException;
 
@@ -27,7 +28,7 @@ public class WebsiteAPI {
         this.reserverTableHandler = new ReserverTableHandler(serviceProxy);
     }
 
-    public void startAPI() throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException, UnrecoverableKeyException, KeyManagementException {
+    public void startAPI() throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException, UnrecoverableKeyException, KeyManagementException, URISyntaxException {
         // Set up the socket address
         InetSocketAddress address = new InetSocketAddress(8443);
 
@@ -38,7 +39,13 @@ public class WebsiteAPI {
         // Initialise the keystore
         char[] password = "simulator".toCharArray();
         KeyStore ks = KeyStore.getInstance("JKS");
-        FileInputStream fis = new FileInputStream("sae.keystore");
+
+        InputStream fis = Main.class.getResourceAsStream("/sae.keystore");
+        if (fis == null) {
+            System.out.println("Keystore not found, sae.keystore needs to be present");
+            return;
+        }
+
         ks.load(fis, password);
 
         // Set up the key manager factory
