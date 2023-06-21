@@ -17,32 +17,44 @@ const [
 
 // Using the data to display markers on the map
 
-function addMarkers() {
-  etablissementsData.forEach((etablissement) => {
-    if (etablissement.fields.coordonnees)
-      L.marker(
-        [
-          etablissement.fields.coordonnees[0],
-          etablissement.fields.coordonnees[1],
-        ],
-        { icon: etablissementIcon }
-      )
-        .addTo(map)
-        .bindPopup(
-          `<b>${etablissement.fields.uo_lib_officiel}</b><br> Académie : ${etablissement.fields.aca_nom}`
-        );
-  });
+function addEtablissementsMarkers() {
+  if (Array.isArray(etablissementsData)) {
+    etablissementsData.forEach((etablissement) => {
+      if (etablissement.fields.coordonnees)
+        L.marker(
+          [
+            etablissement.fields.coordonnees[0],
+            etablissement.fields.coordonnees[1],
+          ],
+          { icon: etablissementIcon }
+        )
+          .addTo(map)
+          .bindPopup(
+            `<b>${etablissement.fields.uo_lib_officiel}</b><br> Académie : ${etablissement.fields.aca_nom}`
+          );
+    });
+    return true;
+  }
+  return false;
+}
 
-  stationsInfoData.data.stations.forEach((station) => {
-    const { station_id } = station;
-    const stationStatus = stationsStatusData.data.stations.find(
-      (station) => station.station_id === station_id
-    );
-    L.marker([station.lat, station.lon], { icon: veloIcon }).addTo(map)
-      .bindPopup(`Station ${station.name}<br> ${station.address}<br>${stationStatus.num_bikes_available} vélos disponibles<br>
+function addStationsMarkers() {
+  if (stationsInfoData?.data?.stations && stationsStatusData?.data?.stations) {
+    stationsInfoData.data.stations.forEach((station) => {
+      const { station_id } = station;
+      const stationStatus = stationsStatusData.data.stations.find(
+        (station) => station.station_id === station_id
+      );
+      L.marker([station.lat, station.lon], { icon: veloIcon }).addTo(map)
+        .bindPopup(`Station ${station.name}<br> ${station.address}<br>${stationStatus.num_bikes_available} vélos disponibles<br>
         ${stationStatus.num_docks_available} places de parking libres sur la station`);
-  });
+    });
+    return true;
+  }
+  return false;
+}
 
+function addIncidentsMarkers() {
   incidentsData.incidents.forEach((incident) => {
     const longLat = incident.location.polyline.split(" ");
     L.marker([longLat[0], longLat[1]], { icon: dangerIcon })
@@ -52,8 +64,12 @@ function addMarkers() {
           incident.endtime.split("T")[0]
         }`
       );
+    return true;
   });
+  return false;
+}
 
+function addRestaurantsMarkers() {
   restaurantData.forEach((resto) => {
     const marker = L.marker([resto.latitude, resto.longitude], {
       icon: restaurantIcon,
@@ -96,6 +112,13 @@ function addMarkers() {
       });
     });
   });
+}
+
+function addMarkers() {
+  if (!addEtablissementsMarkers()) console.log("No etablissements data");
+  if (!addStationsMarkers()) console.log("No stations data");
+  if (!addIncidentsMarkers()) console.log("No incidents data");
+  if (!addRestaurantsMarkers()) console.log("No restaurants data");
 }
 
 addMarkers();
