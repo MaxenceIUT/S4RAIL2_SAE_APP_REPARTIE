@@ -17,18 +17,24 @@ public class GoodFoodHandler implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        // Fetch and return all the restaurants
-        String response = "";
-        int statusCode = 200;
-        try {
-            if (provider.getGoodFoodProvider() == null) throw new Exception("ServiceGoodFood unavailable");
-            response = provider.getGoodFoodProvider().getRestaurants();
-        } catch (Exception e) {
-            statusCode = 500;
-            response = "An error occured while fetching restaurants | Error: " + e.getMessage();
-        }
-        sendJSON(statusCode, exchange, response);
+    public void handle(HttpExchange exchange) {
+        Thread fetcher = new Thread(() -> {
+            int statusCode = 200;
+            String response;
+            try {
+                if (provider.getGoodFoodProvider() == null) throw new Exception("ServiceEtablissements unavailable");
+                response = provider.getGoodFoodProvider().getRestaurants();
+            } catch (Exception e) {
+                statusCode = 500;
+                response = "An error occured while fetching restaurants | Error: " + e.getMessage();
+            }
+            try {
+                sendJSON(statusCode, exchange, response);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        fetcher.start();
     }
 
 }

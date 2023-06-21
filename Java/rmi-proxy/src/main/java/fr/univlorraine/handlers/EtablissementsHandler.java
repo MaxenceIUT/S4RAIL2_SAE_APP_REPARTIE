@@ -5,9 +5,6 @@ import com.sun.net.httpserver.HttpHandler;
 import fr.univlorraine.ServiceProxyImpl;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 import static fr.univlorraine.utils.HttpUtils.sendJSON;
 
@@ -20,18 +17,25 @@ public class EtablissementsHandler implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
+    public void handle(HttpExchange exchange) {
+        Thread fetcher = new Thread(() -> {
             int statusCode = 200;
-            String response = "";
+            String response;
             try {
+                if (provider.getEtablissementsProvider() == null)
+                    throw new Exception("ServiceEtablissements unavailable");
                 response = provider.getEtablissementsProvider().getEtablissements();
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 statusCode = 500;
                 response = "An error occured while fetching restaurants | Error: " + e.getMessage();
             }
-            sendJSON(statusCode, exchange, response);
-
-
+            try {
+                sendJSON(statusCode, exchange, response);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        fetcher.start();
     }
 
 }
