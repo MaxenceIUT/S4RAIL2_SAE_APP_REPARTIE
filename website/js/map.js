@@ -132,7 +132,7 @@ function addRestaurantsMarkers(restaurantData) {
           <label for="date">Date de réservation :</label>
           <input type="datetime-local" id="date">
           <br>
-          <button id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
+          <button  id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
       </div>`
         );
 
@@ -147,10 +147,10 @@ function addRestaurantsMarkers(restaurantData) {
           let nomResto = event.target.getAttribute("data-nomResto");
           let date = document.getElementById("date").value;
 
-          if (nom !== "" && prenom !== "" && nbInv != null && tel !== "") {
+          if (nom !== "" && prenom !== "" && nbInv != null && tel !== "" && date !== '') {
             provider.reserverTable(nom, prenom, nbInv, tel, nomResto, date);
           } else {
-            console.log("Paramètres incomplets");
+            alert("Veuillez rempir tous les champs !!!");
           }
         });
       });
