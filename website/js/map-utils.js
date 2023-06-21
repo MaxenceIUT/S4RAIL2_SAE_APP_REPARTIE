@@ -9,6 +9,8 @@ function initMap() {
   }).addTo(map);
 }
 
+const getMap = () => map;
+
 const etablissementIcon = L.icon({
   iconUrl: "img/school.png",
   iconSize: [40, 40],
@@ -38,7 +40,7 @@ const restaurantIcon = L.icon({
 });
 
 export default {
-  map,
+  getMap,
   initMap,
   etablissementIcon,
   veloIcon,

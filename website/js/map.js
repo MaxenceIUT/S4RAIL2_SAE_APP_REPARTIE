@@ -3,7 +3,7 @@ import mapUtils from "./map-utils.js";
 
 // Loading Leaflet Map and getting the reference to it, getting the icons
 mapUtils.initMap();
-const map = mapUtils.map;
+const map = mapUtils.getMap();
 const { etablissementIcon, veloIcon, dangerIcon, restaurantIcon } = mapUtils;
 
 // Fetching all data from the APIs
