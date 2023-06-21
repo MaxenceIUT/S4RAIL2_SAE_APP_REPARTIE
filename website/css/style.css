@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap");
+
 html {
   display: flex;
   justify-content: center;
   background-color: #151414;
   color-scheme: dark light;
-  font-family: sans-serif;
+  font-family: "Outfit", sans-serif;
   color: #ffffff;
 }
 
@@ -19,6 +21,34 @@ html {
 
 h1 {
   text-wrap: balance;
+  margin: 0px;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+h2 {
+  text-wrap: balance;
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.separator {
+  padding: 0px 1rem;
+  margin: 2rem 0px;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4rem;
+  background-color: orange;
+  margin-top: 1rem;
+  letter-spacing: 0.25rem;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 500;
+  user-select: none;
 }
 
 body {
@@ -27,20 +57,28 @@ body {
 }
 
 ul {
-  max-width: 280px;
   list-style: none;
   margin: 0px;
   padding: 0px;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  gap: 1.5rem;
+}
+
+li {
+  width: clamp(6rem, 30vw, 12rem);
+  height: clamp(6rem, 30vw, 12rem);
 }
 
 li a {
+  position: relative;
   text-align: center;
-  display: block;
-  background-color: hsl(0, 0%, 20%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
   transition: 150ms ease;
   border-radius: 2rem;
   padding: 1rem;
@@ -49,6 +87,28 @@ li a {
   text-decoration: none;
   color: white;
   font-weight: 600;
+  overflow: hidden;
+}
+
+li a div span {
+  font-size: clamp(1rem, 8vw, 3rem);
+}
+
+li a div p{
+  font-size: clamp(0.75rem, 4vw, 1.5rem);
+}
+
+li a div {
+  z-index: 1;
+}
+
+li a img {
+  opacity: 0.4;
+  object-fit: cover;
+  position: absolute;
+  inset: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 li a:hover {
