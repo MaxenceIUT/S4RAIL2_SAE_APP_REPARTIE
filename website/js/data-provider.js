@@ -7,7 +7,7 @@ const fetchJson = async (url) => {
       return await response.json();
     }
   } catch (e) {
-    alert("Impossible de récupérer les données");
+    throw e;
   }
 };
 
@@ -74,5 +74,5 @@ export default {
   getIncidents: getIncidents,
   getGoodFoodRestaurants,
   reserverTable,
-  fetchAll
+  fetchAll,
 };

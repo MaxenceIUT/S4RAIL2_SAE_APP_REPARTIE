@@ -6,18 +6,54 @@ mapUtils.initMap();
 const map = mapUtils.getMap();
 const { etablissementIcon, veloIcon, dangerIcon, restaurantIcon } = mapUtils;
 
-// Fetching all data from the APIs
-const [
-  stationsInfoData,
-  stationsStatusData,
-  incidentsData,
-  restaurantData,
-  etablissementsData,
-] = await provider.fetchAll();
+// Fetching etablissements data
+provider
+  .getEtablissements()
+  .then((etablissementsData) => addEtablissementsMarkers(etablissementsData))
+  .catch((error) => {
+    alert("Impossible de récupérer les données sur les principaux établissements de l'enseignement supérieur");
+    console.error("Impossible de récupérer les données sur les principaux établissements de l'enseignement supérieur", error);
+  });
+
+// Fetching restaurants data
+provider
+  .getGoodFoodRestaurants()
+  .then((restaurantData) => addRestaurantsMarkers(restaurantData))
+  .catch((error) => {
+    alert("Impossible de récupérer les données sur les restaurants");
+    console.error("Impossible de récupérer les données sur les restaurants", error);
+  });
+
+// Fetching incidents data
+provider
+  .getIncidents()
+  .then((incidentsData) => addIncidentsMarkers(incidentsData))
+  .catch((error) => {
+    alert("Impossible de récupérer les données sur les incidents");
+    console.error("Impossible de récupérer les données sur les incidents", error);
+  });
+
+// Fetching stations data
+provider
+  .getStationInformation()
+  .then((stationsInfoData) => {
+    provider
+      .getStationStatus()
+      .then((stationsStatusData) =>
+        addStationsMarkers(stationsInfoData, stationsStatusData)
+      )
+      .catch((error) => {
+        alert("Impossible de récupérer les données sur les stations");
+        console.error("Impossible de récupérer les données sur les stations", error);
+      });
+  })
+  .catch((error) => {
+    alert("Impossible de récupérer les données sur les stations");
+    console.error("Impossible de récupérer les données sur les stations", error);
+  });
 
 // Using the data to display markers on the map
-
-function addEtablissementsMarkers() {
+function addEtablissementsMarkers(etablissementsData) {
   if (Array.isArray(etablissementsData)) {
     etablissementsData.forEach((etablissement) => {
       if (etablissement.fields.coordonnees)
@@ -38,7 +74,7 @@ function addEtablissementsMarkers() {
   return false;
 }
 
-function addStationsMarkers() {
+function addStationsMarkers(stationsInfoData, stationsStatusData) {
   if (stationsInfoData?.data?.stations && stationsStatusData?.data?.stations) {
     stationsInfoData.data.stations.forEach((station) => {
       const { station_id } = station;
@@ -54,7 +90,7 @@ function addStationsMarkers() {
   return false;
 }
 
-function addIncidentsMarkers() {
+function addIncidentsMarkers(incidentsData) {
   if (incidentsData?.incidents && incidentsData.incidents.length > 0) {
     incidentsData.incidents.forEach((incident) => {
       const longLat = incident.location.polyline.split(" ");
@@ -71,7 +107,7 @@ function addIncidentsMarkers() {
   return false;
 }
 
-function addRestaurantsMarkers() {
+function addRestaurantsMarkers(restaurantData) {
   if (Array.isArray(restaurantData)) {
     restaurantData.forEach((resto) => {
       const marker = L.marker([resto.latitude, resto.longitude], {
@@ -119,12 +155,3 @@ function addRestaurantsMarkers() {
   }
   return false;
 }
-
-function addMarkers() {
-  if (!addEtablissementsMarkers()) console.log("No etablissements data");
-  if (!addStationsMarkers()) console.log("No stations data");
-  if (!addIncidentsMarkers()) console.log("No incidents data");
-  if (!addRestaurantsMarkers()) console.log("No restaurants data");
-}
-
-addMarkers();
