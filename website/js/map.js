@@ -18,18 +18,17 @@ let restaurantData = await data_collector.getGoodfoodRestaurant();
 let etablissementsData = await data_collector.getEtablissements();
 
 var etablissementIcon = L.icon({
-    iconUrl: 'img/velo.png',
+    iconUrl: 'img/school.png',
     iconSize:     [40, 40], // size of the icon
     iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
 });
 
+console.log(etablissementsData);
 etablissementsData.forEach(etablissement => {
-    let fields = etablissement['fields'];
-
-    if(fields['coordonnees']){
-        L.marker([fields['coordonnees'][0],fields['coordonnees'][1]]).addTo(map);
-    }
+    if(etablissement.fields.coordonnees)
+    L.marker([etablissement.fields.coordonnees[0],etablissement.fields.coordonnees[1]],{icon: etablissementIcon}).addTo(map)
+        .bindPopup(`<b>${etablissement.fields.uo_lib_officiel}</b><br> Académie : ${etablissement.fields.aca_nom}`);
 
 });
 
@@ -37,7 +36,7 @@ var veloIcon = L.icon({
     iconUrl: 'img/velo.png',
     iconSize:     [40, 40], // size of the icon
     iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
 });
 
 
@@ -54,7 +53,7 @@ var dangerIcon = L.icon({
     iconUrl: 'img/danger.png',
     iconSize:     [50, 50], // size of the icon
     iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
 });
 
 incidentsData.incidents.forEach(incident => {
@@ -67,11 +66,11 @@ let restaurantIcon = L.icon({
     iconUrl: 'img/resto.png',
     iconSize: [50, 50],
     iconAnchor: [25, 25],
-    popupAnchor: [-3, -76]
+    popupAnchor: [0, -10]
 });
 
 restaurantData.forEach(resto => {
-    const marker = L.marker([resto.latitude, resto.longitude], {icon:restaurantIcon}).addTo(map)
+    const marker = L.marker([resto.latitude, resto.longitude], {icon: restaurantIcon}).addTo(map)
         .bindPopup(`${resto.nom}<br>
 <div id="form">
     <label for="nom">Nom :</label>
@@ -90,14 +89,10 @@ restaurantData.forEach(resto => {
 </div>`);
 
 
-
-
-
-
     marker.on('popupopen', (e) => {
         const popup = e.popup;
         const button = popup.getElement().querySelector("#bouttonReserve");
-        button.addEventListener("click",(event) => {
+        button.addEventListener("click", (event) => {
             let nom = document.getElementById('nom').value;
             let prenom = document.getElementById('prenom').value;
             let nbInv = document.getElementById('nbInv').value;
@@ -123,15 +118,8 @@ restaurantData.forEach(resto => {
             } else {
                 console.log("Parametres incomplets");
             }
-
-
-
-
         });
-
-
-
-    });
+    })
 });
 
 
