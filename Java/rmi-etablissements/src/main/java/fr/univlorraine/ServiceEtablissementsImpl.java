@@ -3,6 +3,8 @@ package fr.univlorraine;
 import fr.univlorraine.utils.Destination;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -33,7 +35,9 @@ public class ServiceEtablissementsImpl implements ServiceEtablissements {
                 .GET()
                 .build();
 
-        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpClient httpClient = HttpClient.newBuilder()
+                .proxy(ProxySelector.of(new InetSocketAddress("www-cache.iutnc.univ-lorraine.fr", 3128)))
+                .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return response.body();
