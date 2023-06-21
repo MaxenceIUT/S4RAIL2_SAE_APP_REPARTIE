@@ -55,28 +55,31 @@ function addStationsMarkers() {
 }
 
 function addIncidentsMarkers() {
-  incidentsData.incidents.forEach((incident) => {
-    const longLat = incident.location.polyline.split(" ");
-    L.marker([longLat[0], longLat[1]], { icon: dangerIcon })
-      .addTo(map)
-      .bindPopup(
-        `${incident.short_description}<br> Fin estimée : ${
-          incident.endtime.split("T")[0]
-        }`
-      );
+  if (incidentsData?.incidents && incidentsData.incidents.length > 0) {
+    incidentsData.incidents.forEach((incident) => {
+      const longLat = incident.location.polyline.split(" ");
+      L.marker([longLat[0], longLat[1]], { icon: dangerIcon })
+        .addTo(map)
+        .bindPopup(
+          `${incident.short_description}<br> Fin estimée : ${
+            incident.endtime.split("T")[0]
+          }`
+        );
+    });
     return true;
-  });
+  }
   return false;
 }
 
 function addRestaurantsMarkers() {
-  restaurantData.forEach((resto) => {
-    const marker = L.marker([resto.latitude, resto.longitude], {
-      icon: restaurantIcon,
-    })
-      .addTo(map)
-      .bindPopup(
-        `${resto.nom}<br>
+  if (Array.isArray(restaurantData)) {
+    restaurantData.forEach((resto) => {
+      const marker = L.marker([resto.latitude, resto.longitude], {
+        icon: restaurantIcon,
+      })
+        .addTo(map)
+        .bindPopup(
+          `${resto.nom}<br>
       <div id="form">
           <label for="nom">Nom :</label>
           <input type="text" id="nom">
@@ -92,26 +95,29 @@ function addRestaurantsMarkers() {
           <br>
           <button id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
       </div>`
-      );
+        );
 
-    marker.on("popupopen", (e) => {
-      const popup = e.popup;
-      const button = popup.getElement().querySelector("#bouttonReserve");
-      button.addEventListener("click", (event) => {
-        let nom = document.getElementById("nom").value;
-        let prenom = document.getElementById("prenom").value;
-        let nbInv = document.getElementById("nbInv").value;
-        let tel = document.getElementById("tel").value;
-        let nomResto = event.target.getAttribute("data-nomResto");
+      marker.on("popupopen", (e) => {
+        const popup = e.popup;
+        const button = popup.getElement().querySelector("#bouttonReserve");
+        button.addEventListener("click", (event) => {
+          let nom = document.getElementById("nom").value;
+          let prenom = document.getElementById("prenom").value;
+          let nbInv = document.getElementById("nbInv").value;
+          let tel = document.getElementById("tel").value;
+          let nomResto = event.target.getAttribute("data-nomResto");
 
-        if (nom !== "" && prenom !== "" && nbInv != null && tel !== "") {
-          provider.reserverTable(nom, prenom, nbInv, tel, nomResto);
-        } else {
-          console.log("Paramètres incomplets");
-        }
+          if (nom !== "" && prenom !== "" && nbInv != null && tel !== "") {
+            provider.reserverTable(nom, prenom, nbInv, tel, nomResto);
+          } else {
+            console.log("Paramètres incomplets");
+          }
+        });
       });
     });
-  });
+    return true;
+  }
+  return false;
 }
 
 function addMarkers() {
