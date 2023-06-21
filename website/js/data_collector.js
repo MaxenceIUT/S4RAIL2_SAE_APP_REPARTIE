@@ -7,7 +7,7 @@ const getStationinformation = async () => {
             return await response.json();
         }
     }catch (e) {
-        console.log(e.message);
+        alert('Impossible de récupérer les informations des stations');
     }
 }
 
@@ -20,8 +20,8 @@ const getStationstatus = async () => {
             return await response.json();
         }
     }catch (e) {
-        console.log(e.message);
-        }
+        alert('Impossible de récupérer le statut des stations');
+    }
 }
 
 const getIncidents = async () => {
@@ -33,7 +33,7 @@ const getIncidents = async () => {
             return await response.json();
         }
     } catch (e) {
-        console.log(e.message);
+        alert('Impossible de récupérer les données des incidents');
     }
 
 }
@@ -45,7 +45,7 @@ const getGoodfoodRestaurant = async () => {
             return response.json();
         }
     } catch (e) {
-        console.log(e.message);
+        alert('Impossible de récupérer les données des restaurants');
     }
 }
 
@@ -56,7 +56,7 @@ const getEtablissements = async () => {
             return response.json();
         }
     } catch (e) {
-        console.log(e.message);
+        alert('Impossible de récupérer les données des établissements');
     }
 }
 
