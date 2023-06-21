@@ -51,8 +51,6 @@ public class ServiceGoodFoodImpl implements ServiceGoodFood {
     public void bookTable(String nomRestorant, String nom, String prenom, String nombreInvites, String numTelephone, String dateRes) throws SQLException, RemoteException {
 
         try {
-
-
             Connection connexion = DBConnection.getConnexion();
 
             System.out.println("Recuperation de l'id resto");

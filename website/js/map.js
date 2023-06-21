@@ -130,7 +130,7 @@ function addRestaurantsMarkers(restaurantData) {
           <input type="tel" id="tel">
           <br>
           <label for="date">Date de réservation :</label>
-          <input type="datetime-local" id="date">
+          <input type="datetime-local" id="date" min="{{currentDateTime}}">
           <br>
           <button  id="bouttonReserve" type="submit" data-nomResto="${resto.nom}">Un simple bouton</button>
       </div>`
@@ -149,6 +149,7 @@ function addRestaurantsMarkers(restaurantData) {
 
           if (nom !== "" && prenom !== "" && nbInv != null && tel !== "" && date !== '') {
             provider.reserverTable(nom, prenom, nbInv, tel, nomResto, date);
+            alert("Reservation effectuée");
           } else {
             alert("Veuillez rempir tous les champs !!!");
           }
