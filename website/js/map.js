@@ -12,7 +12,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const stationsInfoData = await provider.getStationInformation();
 const stationsStatusData = await provider.getStationStatus();
 const incidentsData = await provider.getIncidents();
-const restaurantData = await provider.getGoodfoodRestaurants();
+const restaurantData = await provider.getGoodFoodRestaurants();
 const etablissementsData = await provider.getEtablissements();
 
 var etablissementIcon = L.icon({
