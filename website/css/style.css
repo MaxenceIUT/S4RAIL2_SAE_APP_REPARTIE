@@ -1,34 +1,47 @@
 html {
+  display: flex;
+  justify-content: center;
   background-color: #151414;
   color-scheme: dark light;
   font-family: sans-serif;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+@media (width > 768px) {
+  html {
+    margin: 2rem;
+  }
 }
 
 * {
   box-sizing: border-box;
 }
 
-.part-1{
-  margin: 1rem;
-  background-color: hsl(0, 0%, 15%);
-  border-radius: 4rem;
-  padding: 1rem;
+h1 {
+  text-wrap: balance;
+}
+
+body {
+  max-width: 1580px;
+  width: 100%;
 }
 
 ul {
+  max-width: 280px;
   list-style: none;
-}
-
-li {
+  margin: 0px;
+  padding: 0px;
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 li a {
   text-align: center;
   display: block;
   background-color: hsl(0, 0%, 20%);
-  transition: 150ms cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: 150ms ease;
   border-radius: 2rem;
   padding: 1rem;
   width: 100%;
@@ -36,44 +49,14 @@ li a {
   text-decoration: none;
   color: white;
   font-weight: 600;
-  margin: 0.5rem;
 }
 
 li a:hover {
   background-color: hsl(0, 0%, 30%);
-  transform: translateY(-0.5rem);
+  transform: translateY(-0.25rem);
 }
 
 li a:active {
   background-color: hsl(0, 0%, 15%);
-  transform: translateY(0.5rem);
+  transform: translateY(0.25rem);
 }
-
-#title {
-  font-size: 2rem;
-  text-align: center;
-}
-
-.background_image {
-  width: 100%;
-  border-radius: 2rem;
-  height: 26.2rem;
-  background-image: url('../img/iut/IUT_01.jpg');
-  background-size: cover;
-  filter: grayscale(100%);
-  animation: backgroundAnimation 15s infinite linear;
-}
-
-@keyframes backgroundAnimation {
-  25%{
-    background-image: url('../img/iut/IUT_02.jpg');
-  }
-  50% {
-    background-image: url('../img/iut/IUT_03.jpg');
-  }
-  75%{
-    background-image: url('../img/iut/IUT_04.jpg');
-  }
-}
-
-

@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Cartes des stations vélib</title>
+    <title>Carte de Nancy (54)</title>
     <link rel="stylesheet" href="css/velib_map.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
+
 <body>
-    <h1>Cartes des vélibs sur Nancy et alentours</h1>
+    <h1>Carte de Nancy (54)</h1>
+    <h2>Inclut les:</h2>
+    <ul>
+        <li>Stations de vélos en libre service </li>
+        <li>Restaurants</li>
+        <li>Travaux de voirie</li>
+        <li>Principaux établissements</li>
+    </ul>
     <div id="map" style="width: 210vh; height: 80vh;"></div>
-    <fieldset><legend>Légende</legend></fieldset>
+    <fieldset>
+        <legend>Légende</legend>
+    </fieldset>
     <script src="js/map.js" type="module"></script>
 </body>
+
 </html>
