@@ -42,10 +42,11 @@ public class ReserverTableHandler implements HttpHandler {
             nom = params[0].split("=")[1];
             prenom = params[1].split("=")[1];
             nbInv = params[2].split("=")[1];
+            System.out.println(nbInv);
             tel = params[3].split("=")[1];
             nomResto = params[4].split("=")[1];
-            dateRes = params[5].replace('T', ' ').split("=")[1];
-            System.out.println(dateRes);
+            dateRes = params[5].replace('T', ' ').split("=")[1] + ":00";
+            System.out.println("date: " + dateRes);
         } else {
             System.out.println("nb argument incorrect");
         }

@@ -69,7 +69,8 @@ public class ServiceGoodFoodImpl implements ServiceGoodFood {
             pst.close();
 
             System.out.println("recuperation d 'une table dispo");
-            PreparedStatement pst2 = connexion.prepareStatement("SELECT table_id FROM goodfood_tables WHERE seat_count >= ? AND table_id NOT IN (SELECT table_id FROM goodfood_reservations WHERE reservation_date = ?)");
+            PreparedStatement pst2 = connexion.prepareStatement("SELECT table_id FROM goodfood_tables WHERE seat_count >= ? AND table_id NOT IN (SELECT table_id FROM goodfood_reservations WHERE EXTRACT(HOUR FROM reservation_date) = EXTRACT(HOUR FROM ?::timestamp))");
+            System.out.println(nombreInvites);
             pst2.setInt(1, Integer.parseInt(nombreInvites));
             pst2.setTimestamp(2, Timestamp.valueOf(dateRes));
             int idTab = -1;
@@ -97,6 +98,7 @@ public class ServiceGoodFoodImpl implements ServiceGoodFood {
             pst3.setInt(1, idResto);
             pst3.setInt(2, idTab);
             pst3.setTimestamp(3, Timestamp.valueOf(dateRes));
+            System.out.println(nombreInvites);
             pst3.setInt(4, Integer.parseInt(nombreInvites));
             pst3.setString(5, prenom);
             pst3.setString(6, nom);

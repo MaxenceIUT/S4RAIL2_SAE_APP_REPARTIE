@@ -35,13 +35,15 @@ const getEtablissements = async () => {
   return fetchJson(`${API_URL}/api/etablissements`);
 };
 
-const reserverTable = async (nom, prenom, nbInv, tel, nomResto) => {
+const reserverTable = async (nom, prenom, nbInv, tel, nomResto, date) => {
   let parametres = new URLSearchParams();
   parametres.append("nom", nom);
   parametres.append("prenom", prenom);
   parametres.append("nbInv", nbInv);
   parametres.append("tel", tel);
   parametres.append("nomResto", nomResto);
+  parametres.append("date", date);
+
 
   return fetch(`${API_URL}/api/goodfood/reserver`, {
     method: "POST",
