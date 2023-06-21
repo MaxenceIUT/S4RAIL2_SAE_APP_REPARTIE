@@ -52,11 +52,27 @@ const reserverTable = async (nom, prenom, nbInv, tel, nomResto) => {
   });
 };
 
+const fetchAll = async () => {
+  const stationsInfoData = await getStationInformation();
+  const stationsStatusData = await getStationStatus();
+  const incidentsData = await getIncidents();
+  const restaurantData = await getGoodFoodRestaurants();
+  const etablissementsData = await getEtablissements();
+  return [
+    stationsInfoData,
+    stationsStatusData,
+    incidentsData,
+    restaurantData,
+    etablissementsData,
+  ];
+};
+
 export default {
   getEtablissements,
   getStationInformation,
   getStationStatus,
   getIncidents: getIncidents,
   getGoodFoodRestaurants,
-  reserverTable
+  reserverTable,
+  fetchAll
 };
