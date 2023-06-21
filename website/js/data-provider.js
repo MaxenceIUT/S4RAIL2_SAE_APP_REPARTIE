@@ -7,7 +7,7 @@ const fetchJson = async (url) => {
       return await response.json();
     }
   } catch (e) {
-    throw e;
+    alert("Impossible de récupérer les données");
   }
 };
 
